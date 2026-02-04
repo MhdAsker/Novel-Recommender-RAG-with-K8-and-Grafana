@@ -1,0 +1,12 @@
+langchain==1.2.8
+langchain-core==1.2.8
+langchain-community
+langchain-groq
+langchain-huggingface
+langchain-text-splitters
+
+chromadb
+sentence-transformers
+streamlit
+pandas
+python-dotenv

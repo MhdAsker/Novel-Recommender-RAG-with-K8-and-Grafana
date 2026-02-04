@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: novels-recommender-ui
+  labels:
+    app: novels-recommender
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: novels-recommender
+  template:
+    metadata:
+      labels:
+        app: novels-recommender
+    spec:
+      containers:
+      - name: novels-recommender-container
+        image: novels-recommender:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8501
+        envFrom:
+          - secretRef:
+              name: llmops-secrets
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: novels-recommender-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: novels-recommender
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8501

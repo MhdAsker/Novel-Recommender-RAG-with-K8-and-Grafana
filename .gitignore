@@ -1,0 +1,24 @@
+# Virtual environments
+venv/
+.env
+
+# Logs
+logs/
+
+# Python build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Packaging artifacts
+*.egg-info/
+dist/
+build/
+
+# VS Code
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db
