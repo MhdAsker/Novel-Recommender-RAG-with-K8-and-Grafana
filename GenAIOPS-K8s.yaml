@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: novels-recommender-container
-        image: novels-recommender:latest
+        image: llmops-app:latest
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 8501
