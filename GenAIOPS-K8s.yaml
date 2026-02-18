@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: novels-recommender-ui
-  labels:
-    app: novels-recommender
 spec:
   replicas: 1
   selector:
@@ -15,25 +13,26 @@ spec:
         app: novels-recommender
     spec:
       containers:
-      - name: novels-recommender-container
-        image: llmops-app:latest
-        imagePullPolicy: IfNotPresent
-        ports:
-          - containerPort: 8501
-        envFrom:
-          - secretRef:
-              name: llmops-secrets
-
+        - name: novels-recommender-container
+          image: novels-recommender:1.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8501
+          envFrom:
+            - secretRef:
+                name: llmops-secrets
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: novels-recommender-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: novels-recommender
   ports:
-    - protocol: TCP
-      port: 80
+    - port: 80
       targetPort: 8501
+      nodePort: 30007
+
+
