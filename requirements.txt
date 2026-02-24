@@ -10,3 +10,4 @@ sentence-transformers
 streamlit
 pandas
 python-dotenv
+prometheus-client

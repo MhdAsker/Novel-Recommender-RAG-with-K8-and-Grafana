@@ -1,3 +1,17 @@
+from prometheus_client import start_http_server, Counter
+import streamlit as st
+
+# We use st.cache_resource so the server only starts ONCE and doesn't crash on reload
+@st.cache_resource
+def setup_metrics():
+    # This opens port 8000 in the background to broadcast data
+    start_http_server(8000)
+    # This creates a simple counter metric
+    return Counter('streamlit_app_views_total', 'Total number of page views')
+
+# Start the metrics engine and add +1 to the counter every time the app loads
+view_counter = setup_metrics()
+view_counter.inc()
 import sys
 import os
 import streamlit as st
